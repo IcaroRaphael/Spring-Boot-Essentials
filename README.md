@@ -1,2 +1,2 @@
 # Spring-Boot-Essentials
-CURSO: Spring Boot Essentials 2 (DevDojo)
+CURSO: Spring Boot Essentials (DevDojo)
