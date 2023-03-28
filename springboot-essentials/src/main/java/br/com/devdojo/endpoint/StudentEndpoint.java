@@ -3,17 +3,12 @@ package br.com.devdojo.endpoint;
 import br.com.devdojo.error.CustomErrorType;
 import br.com.devdojo.model.Student;
 import br.com.devdojo.repository.StudentRepository;
-import br.com.devdojo.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-
-import static java.util.Arrays.asList;
 
 @RestController
 @RequestMapping("students")
@@ -40,9 +35,14 @@ public class StudentEndpoint {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/findByName/{name}")
+    public ResponseEntity<?> findByStudentsByName(@PathVariable String name){
+        return new ResponseEntity<>(studentDao.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Student student){
-        return new ResponseEntity<>(studentDao.save(student), HttpStatus.OK);
+        return new ResponseEntity<>(studentDao.save(student), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
